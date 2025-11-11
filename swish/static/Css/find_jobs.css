@@ -1,0 +1,1208 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.entire-home-page {
+    padding: 320px 30px 40px 30px;
+    width: 100%;
+    height: fit-content;
+}
+
+.entire-header {
+    padding: 30px 30px 0 30px;
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    position: fixed;
+    /* makes it stay on top */
+    top: 0;
+    /* sticks to the top */
+    left: 0;
+    right: 0;
+    background: white;
+    /* so it doesn’t overlap with posts */
+    z-index: 1000;
+}
+
+/*========== MENU BAR =================*/
+.menu-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.left-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+
+/* HAMBURGER MENU STYLING */
+.hamburger {
+    font-size: 20px;
+    cursor: pointer;
+    color: rgb(40, 40, 40);
+}
+
+svg {
+    width: 80px;
+    /* Adjust logo size */
+    height: 50px;
+    padding-bottom: 13px;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 80px;
+    left: -250px;
+    /* hidden by default */
+    width: 250px;
+    height: 100%;
+    background: white;
+    transition: left 0.3s ease;
+    z-index: 1500;
+    /* lower than header so hamburger/logo stay visible */
+    padding: 0 30px 0 30px;
+}
+
+/* Sidebar links */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 10px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.sidebar ul li a:hover {
+    background: linear-gradient(to right, #f0f0f0, transparent);
+}
+
+/* Active states */
+.sidebar.active {
+    left: 0;
+}
+
+.ham-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.ham-icon img {
+    width: 25px;
+    /* small neat size */
+    height: 25px;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 95%;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  font: inherit;
+  padding:5px;
+  transition:0.3s ease;
+}
+
+
+.moon-sun-button{
+    margin: 280px 0 0 10px;
+}
+
+.right-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+/*MENU BAR EXCEPTION OVERLAY*/
+#menu-overlay {
+    position: fixed;
+    top: 100px;
+    /* adjust to the height of your menu bar */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    /* dark transparent effect */
+    display: none;
+    /* hidden by default */
+    z-index: 999;
+    /* make sure it’s above everything */
+}
+
+
+
+/* Search Container */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-container input {
+    position: absolute;
+    right: 100%;
+    /* 👈 make it expand to the LEFT */
+    margin-right: 10px;
+    /* space between input and glass */
+    width: 0;
+    opacity: 0;
+    transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+.search-container.active input {
+    width: 500px;
+    /* your preferred width */
+    opacity: 1;
+}
+
+
+/* Search Icon */
+.search-icon img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+/* Search Input (hidden at first) */
+#searchInput {
+    width: 0;
+    padding: 10px;
+
+    font-size: 14px;
+    border: 3px solid #0072ff;
+    border-radius: 20px;
+    outline: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+/* When active */
+.search-container.active #searchInput {
+    width: 500px;
+    opacity: 1;
+}
+
+/* Dropdown History */
+#searchHistory {
+    position: absolute;
+    top: 36px;
+    right: 35px;
+    z-index: 1000;
+    width: 500px;
+    display: grid;
+    grid-template-columns: repeat(2, 240px);
+    background: white;
+    border-radius: 8px;
+    list-style: none;
+    padding: 5px 0;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#searchHistory li {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#searchHistory li:hover {
+    background: #f0f0f0;
+}
+
+.hidden {
+    display: none;
+}
+
+
+
+.icon {
+    display: flex;
+    align-items: center;
+}
+
+.icon img {
+    width: 25px;
+    /* small neat size */
+    height: 25px;
+     filter: none;   /* stays original color */
+}
+
+
+/* Notifications dropdown */
+.notifications-dropdown {
+    display: none;
+    position: absolute;
+    top: 70px;
+    /* adjust so it appears below the bell */
+    right: -100px;
+    background: #fff;
+    border-radius: 8px;
+    width: 400px;
+    z-index: 1000;
+    padding: 30px;
+    max-height: 88vh;
+
+}
+
+.notifications-dropdown p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #333;
+    cursor: default;
+}
+
+/* active state for notification icon */
+.notification-icon.active {
+    border: 2px solid #0072ff;
+    border-radius: 50%;
+    padding: 3px;
+}
+
+.updates-title {
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    height: 70px;
+    width: 100%;
+}
+
+.notification-details {
+    overflow-y: auto;
+    max-height: 500px;
+
+        
+    /* Hide scrollbar but keep scrolling */
+    scrollbar-width: none;       /* Firefox */
+    -ms-overflow-style: none;    /* IE/Edge */
+}
+
+.notification-details::-webkit-scrollbar {   /* Chrome, Safari, Opera */
+    display: none;
+}
+
+
+.notification-icon {
+    position: relative;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #0072ff;
+    color: white;
+    border-radius: 50%;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.mark-all-read-btn {
+    background: none;
+    border: none;
+    color: #0084ff;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.mark-all-read-btn:hover {
+    text-decoration: underline;
+}
+
+.notification-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.2s;
+    position: relative;
+}
+
+.notification-item:hover {
+    background: #f8f9fa;
+}
+
+.notification-item.unread {
+    background: #f0f8ff;
+}
+
+.notif-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.notif-text {
+    flex: 1;
+}
+
+.notif-text p {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+}
+
+.notif-time {
+    font-size: 12px;
+    color: #888;
+}
+
+.unread-dot {
+    width: 8px;
+    height: 8px;
+    background: #0084ff;
+    border-radius: 50%;
+    position: absolute;
+    right: 15px;
+}
+
+.no-notifications {
+    text-align: center;
+    padding: 40px 20px;
+    color: #888;
+}
+
+.pfp-icon img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+    /* makes it a circle */
+}
+
+/*========== FIND JOBS PART ================*/
+.find-jobs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 60px 0 20px 0;
+}
+
+.underline {
+    height: 2px;
+    background-color: #62625B;
+    width: 65px;
+    border-radius: 50px;
+}
+
+
+.entire-jobs-page {
+    padding: 170px 30px 40px 30px;
+    width: 100%;
+    /* gap: 30px; */
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+}
+
+/* ============ JOB POSTS CATEGORIES =========== */
+.job-post-cat{
+  margin: 30px 30px 30px 0;
+  padding: 30px;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px, solid, gray;
+  border-radius: 20px;
+}
+
+.job-post-cat h3{
+  font-size: 35px;
+}
+
+.category-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* space between each category */
+}
+
+.category-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+/* ================= JOB POSTS ================= */
+
+.job-post-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 350px);
+    padding: 30px 0;
+    gap: 20px;
+    /* overflow-y: auto; /* removed scrollbars already */
+    /* scrollbar-width: none; Firefox */ 
+}
+/* 
+.job-post-grid::-webkit-scrollbar {
+    display: none; /* Chrome, Safari 
+} */
+
+
+.job-card {
+    width: 350px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    border: 1px, solid, gray;
+    border-radius: 20px;
+}
+
+.hirer-details a{
+  text-decoration: none;
+}
+
+.hirer-profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.hirer-name {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+
+    max-width: 200px;   /* adjust depending on how much space you want */
+  white-space: nowrap; /* prevents the text from wrapping to a new line */
+  overflow: hidden;    /* hides extra characters */
+  text-overflow: ellipsis; /* shows "..." at the end */
+  text-decoration: none;
+}
+
+.hirer-name a{
+  color: #000000;
+}
+
+
+.hirer-username {
+    color: gray;
+    font-size: 0.9rem;
+
+    max-width: 200px;   /* adjust depending on how much space you want */
+  white-space: nowrap; /* prevents the text from wrapping to a new line */
+  overflow: hidden;    /* hides extra characters */
+  text-overflow: ellipsis; /* shows "..." at the end */
+  text-decoration: none;
+}
+
+.hirer-username a{
+  color: gray;
+}
+
+
+.hirer-icon img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    /* makes it a circle */
+}
+
+.job-title h1 {
+    font-size: 1.5rem;
+    margin: 10px 0 5px 0;
+}
+
+.job-paragraph {
+    max-width: 340px;
+    color: gray;
+    margin-bottom: 10px;
+}
+
+.job-date {
+    color: gray;
+    font-size: 0.7rem;
+}
+
+.job-paragraph p {
+    max-height: 3.6em;        /* ~2 lines */
+    line-height: 1.8em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    display: -webkit-box;
+    display: box;             /* fallback */
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;    /* Chrome, Safari, Edge */
+    line-clamp: 2;            /* Future standard */
+
+    color: gray;
+}
+
+.job-cats{
+  margin-top: 10px;
+  color: #fdfefe;
+   display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+
+.job-cats span {
+    display: inline-block;
+    padding: 4px 10px;
+    background: #0072ff;
+    border-radius: 12px;
+    font-size: 0.85rem;
+}
+
+.delete-job-form {
+    margin-top: 10px;
+}
+
+.delete-job-btn {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.delete-job-btn:hover {
+    background-color: #e60000;
+}
+
+/* ===== Modal ===== */
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1000;
+  top: 0; left: 0; 
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center; 
+  align-items: center;
+  padding: 20px; /* so modal doesn’t stick to screen edges */
+}
+
+/* Modal content */
+.modal-content {
+  background: #fff;
+  border-radius: 16px;
+  padding: 30px;
+  width: 95%;
+  max-width: 700px;   /* increased from 500px */
+  max-height: 85vh;   /* prevents overflow on small screens */
+  overflow-y: auto;   /* scroll inside if content is too long */
+  position: relative;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  animation: popupFade 0.3s ease-out;
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 15px; right: 20px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #333;
+}
+
+.close-btn:hover{
+  color: red;
+}
+/* Hirer section */
+.modal-hirer {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.modal-hirer img {
+  width: 70px; 
+  height: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+#modalJobTitle{
+  margin: 30px 0 30px 0;
+}
+
+#modalJobDescription{
+  margin-bottom: 30px;
+}
+
+#modalJobDate{
+  font-size: 15px;
+  color: #5c5c5c;
+}
+
+/* Apply button */
+.apply-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: #007bff;
+  color: #fff;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.apply-btn:hover {
+  background: #0056b3;
+}
+
+/* Fade-in animation */
+@keyframes popupFade {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+
+/*====== ADD JOB SIGN ========*/
+.create-job-btn {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 10px;
+    border-radius: 10px;
+    background-color: #0072ff;
+    color: #fff;
+    text-decoration: none;
+    transition: 0.5s, ease, 0.3s ease;
+    width: 120px;
+    height: 30px;
+
+    position: fixed;
+    top: 650px;
+    right: 30px;
+}
+
+
+.create-job-btn:hover {
+    scale: 120%;
+    color: white;
+}
+
+
+.plus-icon img {
+    width: 25px;
+    /* small neat size */
+    height: 25px;
+}
+
+.create-job-btn a {
+    text-decoration: none;
+    color: white;
+    margin: 0;
+}
+
+
+/* ===== CREATE JOB MODAL ===== */
+.create-job-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* ===== MODAL CONTENT ===== */
+.create-job-modal-content {
+  background: #ffffff;
+  padding: 32px 26px;
+  border-radius: 18px;
+  width: 95%;
+  max-width: 420px;
+  position: relative;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  animation: popup 0.25s ease-out;
+}
+
+@keyframes popup {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== CLOSE BUTTON ===== */
+.close-btn {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 22px;
+  color: #888;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.close-btn:hover {
+  color: #222;
+  transform: scale(1.1);
+}
+
+/* ===== HEADER ===== */
+.create-job-modal-content h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+/* ===== FORM ===== */
+#createJobForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#createJobForm label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #555;
+}
+
+#createJobForm input,
+#createJobForm textarea {
+  border: 1.6px solid #ddd;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  outline: none;
+  background: #fafafa;
+  transition: 0.25s ease;
+}
+
+#createJobForm input:focus,
+#createJobForm textarea:focus {
+  border-color: #6a5acd;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(106, 90, 205, 0.12);
+}
+
+/* ===== SUBMIT BUTTON ===== */
+.submit-btn {
+  background: linear-gradient(135deg, #6a5acd, #7b68ee);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+  box-shadow: 0 5px 14px rgba(106, 90, 205, 0.3);
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #7b68ee, #8a2be2);
+  box-shadow: 0 7px 18px rgba(106, 90, 205, 0.4);
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 480px) {
+  .create-job-modal-content {
+    padding: 26px 20px;
+  }
+  .submit-btn {
+    font-size: 0.95rem;
+  }
+}
+
+.category-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.category-item {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
+
+/* ===== Modal Styles ===== */
+.job-modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7); /* dim background */
+  backdrop-filter: blur(5px);
+  z-index: 2000; /* above everything */
+  justify-content: center;
+  align-items: center;
+}
+
+.job-modal-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto; /* scroll if text too long */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  animation: fadeInUp 0.3s ease;
+}
+
+.close-btn {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-hirer-profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.modal-hirer-profile img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.message-icon-wrapper {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.messages-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #0072ff; /* Blue */
+    color: white;
+    border-radius: 50%;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/*=========== DARKMODE SETTINGS================*/
+/* Default Light Mode */
+body {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background: #121212;
+  color: #ffffff;
+}
+
+/* Example for cards/containers */
+.card {
+  background: #f9f9f9;
+  color: #333;
+}
+
+body.dark-mode .card {
+  background: #1e1e1e;
+  color: #ddd;
+}
+
+body.dark-mode .entire-header {
+    background-color: #121212;
+}
+
+body.dark-mode .sidebar{
+    background-color:#121212 ;
+}
+
+body.dark-mode .sidebar ul li a{
+    color: white;
+}
+
+body.dark-mode .notification-item.unread {
+    background: #154f96;
+}
+
+body.dark-mode .notification-item:hover {
+    background: #525252;
+}
+
+body.dark-mode .sidebar ul li a:hover {
+    background: linear-gradient(to right, #303030 , transparent);
+}
+
+body.dark-mode .modal-content{
+    background-color: #1e1e1e ;
+}
+
+body.dark-mode #searchInput{
+    background-color: #121212;
+    color: white;
+}
+
+body.dark-mode #searchHistory{
+    background-color: #121212;
+    color: white;
+}
+
+
+body.dark-mode .notifications-dropdown{
+    background: #121212;
+}
+
+body.dark-mode .notifications-dropdown p{
+    color: white;
+}
+
+body.dark-mode .updates-title {
+    background-color: #121212;
+}
+
+
+/* when dark mode is active */
+body.dark-mode .icon img {
+  filter: invert(1) brightness(100); /* black -> white */
+}
+
+body.dark-mode .ham-icon img{
+     filter: invert(1) brightness(100); /* black -> white */
+}
+
+
+body.dark-mode .search-icon img{
+     filter: invert(1) brightness(100); /* black -> white */
+}
+
+
+/* dark mode */
+body.dark-mode .hamburger {
+  color: white;
+}
+
+body.dark-mode .hirer-name a{
+  color: white;
+}
+
+
+
+
+/*responsiveness for lil phones*/
+@media screen and (max-width: 767px) and (min-width: 320px) {
+    .job-post-grid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .create-job-btn {
+        top: 90%;
+    }
+
+    .job-card {
+        width: 100%;
+    }
+
+    .job-paragraph {
+        max-width: 90%;
+    }
+
+    /* When active */
+    .search-container.active #searchInput {
+        width: 160px;
+    }
+
+
+    /* Dropdown History */
+    #searchHistory {
+        width: 160px;
+        right: 35px;
+    }
+
+    .notifications-dropdown {
+        width: 100%;
+        max-height: 90vh;
+    }
+
+    .notification-details {
+        max-height: 75vh;
+    }
+
+
+    .modal-content {
+    max-width: 95%;
+    padding: 18px;
+  }
+  .modal-hirer img {
+    width: 55px;
+    height: 55px;
+  }
+  .apply-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+
+@media screen and (max-height: 568px) and (max-width: 320px) {
+    
+    .create-job-btn {
+        top: 95%;
+    }
+
+      .modal-content {
+    max-width: 98%;
+    padding: 15px;
+  }
+  .modal-hirer img {
+    width: 45px;
+    height: 45px;
+  }
+  .close-btn {
+    font-size: 20px;
+  }
+}
+
+
+
+/* responsiveness for ipads n stuff*/
+@media (min-width: 768px) and (max-width: 1114px) {
+    .job-post-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 370px);
+    }
+
+    .create-job-btn {
+        top: 93%;
+    }
+
+    
+    .job-card {
+        width: 100%;
+    }
+
+    .job-paragraph {
+        max-width: 90%;
+    }
+
+
+    
+    /* When active */
+    .search-container.active #searchInput {
+        width: 400px;
+    }
+
+
+    /* Dropdown History */
+    #searchHistory {
+        width: 400px;
+        right: 35px;
+    }
+
+    
+    .notifications-dropdown {
+        max-height: 95vh;
+    }
+
+    .notification-details {
+        max-height: 80vh;
+    }
+
+      .modal-content {
+    max-width: 600px;
+    padding: 22px;
+  }
+  .modal-hirer img {
+    width: 60px;
+    height: 60px;
+  }
+}

@@ -1,0 +1,260 @@
+
+/* === Gradient Background Animation === */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(-45deg, #1e3c72, #2a5298, #00c6ff, #0072ff);
+  background-size: 400% 400%;
+  animation: gradient 12s ease infinite;
+  color: white;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* === Layout === */
+.container {
+  display: flex;
+  width: 90%;
+  height: 80%;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* Left side (logo) */
+.left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+svg {
+  width: 400px; /* Adjust logo size */
+  height: 400px;
+}
+
+path {
+  stroke: #fff;              /* Stroke is white */
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  fill: white;               /* Fill will be white */
+  fill-opacity: 0;           /* Start invisible */
+
+  stroke-dasharray: 2000;    /* Outline dash length */
+  stroke-dashoffset: 2000;   /* Start hidden */
+  
+  animation: draw 20s ease forwards,
+             fillIn 1s ease forwards 1.5s; /* Fill after stroke */
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fillIn {
+  to {
+    fill-opacity: 1; /* Fade fill in */
+  }
+}
+
+
+/* Right side (login form) */
+.right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  padding: 40px;
+  border-radius: 16px;
+  width: 80%;
+  max-width: 350px;
+  text-align: center;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+.card h2 {
+  margin-bottom: 20px;
+}
+
+.card input {
+  width: 93%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+}
+
+.card button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 8px;
+  background: white;
+  color: #2a5298;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card button:hover {
+  background: #02408c;
+  color: white;
+}
+
+/* Divider */
+.divider {
+  margin: 20px 0;
+  font-size: 14px;
+  opacity: 0.8;
+  position: relative;
+}
+.divider::before, .divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: white;
+}
+.divider::before { left: 0; }
+.divider::after { right: 0; }
+
+/* Google button */
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: white;
+  color:#2a5298;
+  font-weight: 500;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border:none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.google-btn:hover {
+  background: #02408c;
+  color: white;
+}
+
+.google-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+.card p {
+  margin-top: 20px;
+  font-size: 14px;
+}
+.card a {
+  color: #02408c;
+  text-decoration: none;
+}
+
+.password-wrapper {
+  position: relative;
+  width:93%;
+}
+
+.password-wrapper input {
+  width:92%;
+  padding-right: 40px; /* Make space for icon */
+}
+
+.toggle-password {
+  width: 20px;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  user-select: none;
+}
+
+
+/*responsiveness for lil phones*/
+@media screen and (max-width: 767px) and (min-width: 320px) {
+  .container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+    height: fit-content;
+    padding: 3%;
+    gap: 10px;
+  }
+
+  svg{
+    width: 200px;
+    height: 100px;
+  }
+}
+
+
+@media screen and (max-height: 568px) and (max-width: 320px) {
+  svg{
+    margin-top: 150px;
+    width: 150px;
+    height: 100px;
+  }
+
+  
+.card input {
+  width: 90%;}
+
+}
+
+
+
+/* responsiveness for ipads n stuff*/
+@media (min-width: 768px) and (max-width: 1114px) {
+    .container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  gap: 40px;
+height: fit-content;
+width: 100%;
+  }
+
+    
+  svg{
+    width: 350px;
+    height: 200px;
+  }
+
+  .right{
+    width: 90%;
+    height: 100%;
+  }
+
+  .card{
+    width: 90%;
+    max-width: 500px;
+    height: 400px;
+  }
+}

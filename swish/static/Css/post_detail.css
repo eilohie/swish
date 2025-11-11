@@ -1,0 +1,1298 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.entire-menu {
+    padding: 30px 30px 0 30px;
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    position: fixed;
+    /* makes it stay on top */
+    top: 0;
+    /* sticks to the top */
+    left: 0;
+    right: 0;
+    background: white;
+    /* so it doesn’t overlap with posts */
+    z-index: 1000;
+}
+
+/*========== MENU BAR =================*/
+.menu-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+
+
+}
+
+.left-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+
+/* HAMBURGER MENU STYLING */
+.hamburger {
+    font-size: 20px;
+    cursor: pointer;
+    color: rgb(40, 40, 40);
+}
+
+svg {
+    width: 80px;
+    /* Adjust logo size */
+    height: 50px;
+    padding-bottom: 13px;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 80px;
+    left: -250px;
+    /* hidden by default */
+    width: 250px;
+    height: 100%;
+    background: white;
+    transition: left 0.3s ease;
+    z-index: 1500;
+    /* lower than header so hamburger/logo stay visible */
+    padding: 0 30px 0 30px;
+}
+
+/* Sidebar links */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 10px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.sidebar ul li a:hover {
+    background: linear-gradient(to right, #f0f0f0, transparent);
+}
+
+/* Active states */
+.sidebar.active {
+    left: 0;
+}
+
+.ham-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 95%;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  font: inherit;
+  padding:5px;
+  transition:0.3s ease;
+}
+
+
+.ham-icon img {
+    width: 25px;
+    /* small neat size */
+    height: 25px;
+}
+
+.moon-sun-button{
+    margin: 280px 0 0 10px;
+}
+
+
+.right-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+/*MENU BAR EXCEPTION OVERLAY*/
+#menu-overlay {
+    position: fixed;
+    top: 100px;
+    /* adjust to the height of your menu bar */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    /* dark transparent effect */
+    display: none;
+    /* hidden by default */
+    z-index: 999;
+    /* make sure it’s above everything */
+}
+
+
+
+/* Search Container */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-container input {
+    position: absolute;
+    right: 100%;
+    /* 👈 make it expand to the LEFT */
+    margin-right: 10px;
+    /* space between input and glass */
+    width: 0;
+    opacity: 0;
+    transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+.search-container.active input {
+    width: 500px;
+    /* your preferred width */
+    opacity: 1;
+}
+
+
+/* Search Icon */
+.search-icon img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+/* Search Input (hidden at first) */
+#searchInput {
+    width: 0;
+    padding: 10px;
+
+    font-size: 14px;
+    border: 3px solid #0072ff;
+    border-radius: 20px;
+    outline: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+/* When active */
+.search-container.active #searchInput {
+    width: 500px;
+    opacity: 1;
+}
+
+/* Dropdown History */
+#searchHistory {
+    position: absolute;
+    top: 36px;
+    right: 35px;
+    z-index: 1000;
+    width: 500px;
+    display: grid;
+    grid-template-columns: repeat(2, 240px);
+    background: white;
+    border-radius: 8px;
+    list-style: none;
+    padding: 5px 0;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#searchHistory li {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#searchHistory li:hover {
+    background: #f0f0f0;
+}
+
+.hidden {
+    display: none;
+}
+
+
+
+.icon {
+    display: flex;
+    align-items: center;
+}
+
+.icon img {
+    width: 25px;
+    /* small neat size */
+    height: 25px;
+}
+
+
+/* Notifications dropdown */
+.notifications-dropdown {
+    display: none;
+    position: absolute;
+    top: 70px;
+    /* adjust so it appears below the bell */
+    right: -100px;
+    background: #fff;
+    border-radius: 8px;
+    width: 400px;
+    z-index: 1000;
+    padding: 30px;
+    max-height: 88vh;
+
+}
+
+.notifications-dropdown p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #333;
+    cursor: default;
+}
+
+/* active state for notification icon */
+.notification-icon.active {
+    border: 2px solid #0072ff;
+    border-radius: 50%;
+    padding: 3px;
+}
+
+.updates-title {
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    height: 70px;
+    width: 100%;
+}
+
+.notification-details {
+    overflow-y: auto;
+    max-height: 500px;
+        
+    /* Hide scrollbar but keep scrolling */
+    scrollbar-width: none;       /* Firefox */
+    -ms-overflow-style: none;    /* IE/Edge */
+}
+
+.notification-details::-webkit-scrollbar {   /* Chrome, Safari, Opera */
+    display: none;
+}
+
+
+.notification-icon {
+    position: relative;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #0072ff;
+    color: white;
+    border-radius: 50%;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.mark-all-read-btn {
+    background: none;
+    border: none;
+    color: #0084ff;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.mark-all-read-btn:hover {
+    text-decoration: underline;
+}
+
+.notification-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.2s;
+    position: relative;
+}
+
+.notification-item:hover {
+    background: #f8f9fa;
+}
+
+.notification-item.unread {
+    background: #f0f8ff;
+}
+
+.notif-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.notif-text {
+    flex: 1;
+}
+
+.notif-text p {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+}
+
+.notif-time {
+    font-size: 12px;
+    color: #888;
+}
+
+.unread-dot {
+    width: 8px;
+    height: 8px;
+    background: #0084ff;
+    border-radius: 50%;
+    position: absolute;
+    right: 15px;
+}
+
+.no-notifications {
+    text-align: center;
+    padding: 40px 20px;
+    color: #888;
+}
+
+.pfp-icon img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+    /* makes it a circle */
+}
+
+/* ========== POSTS =================  */
+
+/* Flex layout: Big post on left, suggestions on right */
+.post-detail-container {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    gap: 20px;
+    padding: 120px 30px 30px; /* space for fixed menu */
+}
+
+/* Big Post */
+/* === LEFT MAIN POST === */
+.main-post {
+    border-radius: 12px;
+    padding: 20px 20px 0 20px;
+    /* padding-bottom: 80px; to compensate for sticky input */
+    height: calc(100vh - 150px);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: none; /* Firefox */
+}
+
+.main-post::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+
+
+
+
+
+.top-bar{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.right-top-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+.left-top-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+.three-dots {
+    position: relative; /* makes dropdown anchor to this */
+}
+/* ========== Default contact dropdown (desktop) ========== */
+.contact-dropdown {
+  display: none;
+  position: absolute;
+  top: 155%;
+  right: -20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  padding: 10px;
+  min-width: 180px;
+  max-width: 400px; /* safety cap */
+  z-index: 2000;
+}
+.contact-dropdown p, 
+.contact-dropdown a {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+    text-align: left;
+}
+
+.contact-dropdown a:hover {
+    text-decoration: underline;
+    color: #0072ff;
+}
+
+
+
+/* =============== MAIN POST====================== */
+
+.heart-icon {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.heart-icon:active {
+  transform: scale(1.2);
+}
+
+
+
+.center-image{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ flex-shrink: 0;
+}
+
+.main-image-div{
+width: 100%;
+max-width: 500px;
+height: 100%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.main-image-div img {
+  width: 100%;
+height: 100%;
+  border-radius: 15px;
+}
+
+
+
+.post-user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 30px 0 30px 0;
+     flex-shrink: 0;
+}
+
+
+/*text truncation with ellipsis.*/
+.post-user-name h4 {
+  max-width: 500px;   /* adjust depending on how much space you want */
+  white-space: nowrap; /* prevents the text from wrapping to a new line */
+  overflow: hidden;    /* hides extra characters */
+  text-overflow: ellipsis; /* shows "..." at the end */
+}
+
+
+.profile-link {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* spacing between pic & name */
+    text-decoration: none; /* removes underline */
+    color: inherit; /* keeps same text color */
+}
+.profile-link:hover {
+    opacity: 0.8; /* little feedback on hover */
+}
+
+
+.about-post {
+  position: relative;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #444;
+  max-width: 500px;
+}
+
+.about-post p {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;   /* show only 2 lines initially */
+  -webkit-box-orient: vertical;
+  
+  line-clamp: 2;           /* Standard (future support) */
+}
+
+
+.about-post p.expanded {
+  -webkit-line-clamp: unset; /* removes truncation */
+  display: block;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+}
+
+
+.read-more {
+  color: #0072ff;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 4px;
+}
+
+
+
+.categories {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    /* makes it scroll horizontally */
+    scrollbar-width: none;
+    /* hide scrollbar in Firefox */
+    padding: 10px;
+     flex-shrink: 0;
+}
+
+.categories::-webkit-scrollbar {
+    display: none;
+    /* hide scrollbar in Chrome/Edge */
+}
+
+.category {
+    background-color: #0072ff;
+    flex: 0 0 auto;
+    /* stops shrinking */
+    width: 130px;
+    height: fit-content;
+    text-align: center;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.category:hover {
+    transform: scale(1.05);
+}
+
+.category a{
+  text-decoration: none;
+  color: white;
+}
+
+.line{
+  width: 100%;
+  height: 1px;
+  background-color: #7e8a9c;
+  margin: 20px 0 20px 0;
+   flex-shrink: 0;
+}
+
+
+.comment-section {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  /* max-height: 500px; collapsed height */
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  position: relative;
+   flex-shrink: 0;
+}
+
+/* Expanded state */
+.comment-section.expanded {
+  max-height: 400px; /* adjust height as needed */
+}
+
+/* Header always visible */
+.comments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.comment-drop-arrow {
+  cursor: pointer;
+  font-size: 18px;
+  user-select: none;
+}
+
+/* Scrollable comments */
+.comments-wrapper {
+  max-height: 250px;
+    overflow-y: auto;
+    padding-right: 5px;
+       
+    /* Hide scrollbar but keep scrolling */
+    scrollbar-width: none;       /* Firefox */
+    -ms-overflow-style: none;    /* IE/Edge */
+}
+
+
+
+.comments-wrapper::-webkit-scrollbar {   /* Chrome, Safari, Opera */
+    display: none;
+}
+
+.comments{
+  margin: 0px 0 20px 0;
+  position: relative;
+  max-width: 90%;
+  word-wrap: break-word;
+}
+
+.comment {
+  display: flex;
+  gap: 12px;
+  padding: 12px 8px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  align-items: flex-start;
+}
+
+.comment .comment-body {
+  flex: 1;
+}
+
+
+.comment-topline {
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.comment-username {
+  font-weight:600;
+  text-decoration:none;
+  color: inherit;
+}
+
+.timestamp {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.comment .replies-container {
+  margin-top: 8px;
+  margin-left: 44px;
+}
+
+.hidden { display: none; }
+
+/* animations */
+.fade-in { animation: fadeIn .28s ease forwards; opacity:0; }
+@keyframes fadeIn { to { opacity: 1; } }
+.fade-out { animation: fadeOut .28s ease forwards; }
+@keyframes fadeOut { to { opacity: 0; transform: translateY(-6px); } }
+
+/* Read-more link */
+.read-more {
+  display: inline-block;
+  margin-left: 6px;
+  color: #0072ff;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+
+
+.comment-actions{
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-start;
+  gap: 10px;
+
+
+}
+
+.reply-toggle{
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: #0072ff;
+  text-align: left;
+  margin-left: 0;
+  margin-right: auto;
+  display: inline-block;
+}
+
+.reply-open{
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: #0072ff;
+   text-align: left;
+  margin-left: 0;
+  margin-right: auto;
+  display: inline-block;
+}
+
+/* wrapper comment layout */
+.comment { display:block; margin:12px 0; }
+
+/* bubble container */
+.comment-bubble { display:flex; gap:10px; align-items:flex-start; max-width:80%; }
+
+/* avatars */
+.comment-avatar { width:36px; height:36px; border-radius:50%; object-fit:cover; }
+
+/* body inside bubble */
+.comment-bubble .comment-body { background:none; padding:10px 12px; border-radius:14px; box-shadow: 0 1px 0 rgba(0,0,0,0.03); }
+.comment-bubble .comment-topline { display:flex; gap:8px; align-items:center; margin-bottom:6px; }
+.comment-bubble .comment-username { font-weight:600; text-decoration:none; color:inherit; }
+.comment-bubble .timestamp { font-size:0.8rem; color:#666; margin-left:6px; }
+
+/* reply container alignment */
+.comment.reply { margin-left: 48px; } /* default left-indented replies */
+
+/* BRAND owner reply bubble (right aligned) */
+.bubble-owner { justify-content:flex-end; } /* align avatar+bubble to right-side inside wrapper */
+.bubble-owner .comment-body {
+  background: #0072ff;
+  color: #fff;
+  border-radius: 14px;
+}
+/* to place avatar right of bubble for owner replies, float avatar after bubble */
+.bubble-owner .profile-link { order: 2; }        /* put avatar after body */
+.bubble-owner .comment-body { order: 1; }        /* bubble first, avatar second */
+
+/* other-user replies: soft gray */
+.bubble-other .comment-body { background:none; color:#111; }
+
+/* top-level normal comment bubble */
+.bubble-normal .comment-body { background: none; }
+
+/* replies-container styling */
+.replies-container { margin-top:8px; display:block; }
+
+/* hidden utility */
+.hidden { display:none; }
+
+/* animations */
+.fade-in { animation: fadeIn .28s ease forwards; opacity:0; transform: translateY(4px); }
+@keyframes fadeIn { to { opacity:1; transform: translateY(0); } }
+.fade-out { animation: fadeOut .28s ease forwards; }
+@keyframes fadeOut { to { opacity:0; transform: translateY(-6px); } }
+
+/* reply-indicator UI */
+.reply-indicator {
+  background: none;
+  border-left: 4px solid #0072ff;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.reply-indicator button {
+  margin-left: 12px;
+  background:none;
+  border:none;
+  color:red;
+  cursor:pointer;
+}
+
+
+
+/* Read more style */
+.read-more { color:#0072ff; cursor:pointer; margin-left:6px; font-size:0.95rem; }
+
+
+
+.delete-comment {
+  position: absolute;
+  top: 4px;
+  right: 4px; /* slight padding from edge */
+  display: none;
+  font-size: 14px;
+  color: #888;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.comment:hover .delete-comment {
+  display: inline-block;
+}
+
+.delete-comment:hover {
+  color: red;
+}
+
+
+.comment-body {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.comment-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Show 3 lines only */
+  
+  line-clamp: 3;  
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.comment-body.expanded .comment-text {
+  -webkit-line-clamp: unset; /* Show full text */
+  
+  line-clamp: unset;  
+  overflow: visible;
+}
+
+.read-more {
+  display: inline-block;
+  margin-top: 5px;
+  color: #0072ff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+
+
+/* === COMMENT INPUT STICKY BOTTOM === */
+.chat-input {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    padding: 12px;
+    display: flex;
+    gap: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.chat-input input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+ 
+  outline: none;
+   border: 3px solid #0072ff;
+    border-radius: 20px;
+}
+
+.chat-input button {
+  margin-left: 5px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 15px;
+  background: #0072ff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.chat-input button:hover {
+  background: #2b82e4;
+}
+
+
+
+/* ================ Suggested Posts =============== */
+
+/* === RIGHT SIDE SUGGESTED POSTS GRID === */
+.suggested-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    width: 100%;
+    overflow-y: auto; /* removed scrollbars already */
+    scrollbar-width: none; /* Firefox */
+}
+
+.suggested-grid::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+
+.suggested-grid img {
+    width: 100%;
+    height: 250px; /* adjust as you like */
+    object-fit: cover; /* crops edges instead of squishing */
+    border-radius: 8px; /* optional, looks cleaner */
+        transition: transform 0.2s ease-in-out;
+}
+
+/* Optional hover zoom */
+.suggested-grid img:hover {
+    transform: scale(1.03);
+
+}
+
+.suggested-section {
+    height: calc(100vh - 150px); /* adjust based on your layout */
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* Invisible scrollbar */
+.suggested-section::-webkit-scrollbar {
+    width: 0;
+}
+
+/* Title style */
+.suggested-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #333; /* optional: change based on theme */
+}
+
+
+.suggested-grid a {
+    display: block;
+}
+
+
+
+.message-icon-wrapper {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.messages-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #0084ff; /* Blue */
+    color: white;
+    border-radius: 50%;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+/*=========== DARKMODE SETTINGS================*/
+/* Default Light Mode */
+body {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background: #121212;
+  color: #ffffff;
+}
+
+body.dark-mode .notification-item.unread {
+    background: #154f96;
+}
+
+body.dark-mode .notification-item:hover {
+    background: #525252;
+}
+
+body.dark-mode .entire-menu {
+    background-color: #121212;
+}
+
+body.dark-mode .sidebar{
+    background-color:#121212 ;
+}
+
+body.dark-mode .sidebar ul li a{
+    color: white;
+}
+
+
+body.dark-mode .sidebar ul li a:hover {
+    background: linear-gradient(to right, #303030 , transparent);
+}
+
+
+
+body.dark-mode #searchInput{
+    background-color: #121212;
+    color: white;
+}
+
+body.dark-mode #searchHistory{
+    background-color: #121212;
+    color: white;
+}
+
+body.dark-mode .notifications-dropdown{
+    background: #121212;
+}
+
+body.dark-mode .notifications-dropdown p{
+    color: white;
+}
+
+body.dark-mode .updates-title {
+    background-color: #121212;
+}
+
+
+/* when dark mode is active */
+body.dark-mode .icon img {
+  filter: invert(1) brightness(100); /* black -> white */
+}
+
+
+/* But if the heart is liked, remove the filter so the red heart shows */
+.dark-mode .heart-icon.liked {
+  filter: none;
+}
+
+body.dark-mode .ham-icon img{
+     filter: invert(1) brightness(100); /* black -> white */
+}
+
+
+body.dark-mode .search-icon img{
+     filter: invert(1) brightness(100); /* black -> white */
+}
+
+
+/* dark mode */
+body.dark-mode .hamburger {
+  color: white;
+}
+
+
+body.dark-mode .about-post{
+  color: white;
+}
+
+body.dark-mode .chat-input{
+  background-color: #121212;
+}
+
+body.dark-mode .comment-message{
+  background-color: #121212;
+  color: white;
+}
+
+body.dark-mode .suggested-title{
+  color: white;
+}
+
+
+body.dark-mode .contact-dropdown{
+    background-color: #121212;
+}
+
+body.dark-mode .contact-dropdown p{
+    color: white;
+}
+body.dark-mode .contact-dropdown a{
+    color: white;
+}
+
+body.dark-mode .contact-dropdown a:hover{
+    color: #2685f8;
+    text-decoration: underline;
+}
+
+/*responsiveness for lil phones*/
+@media screen and (max-width: 767px) and (min-width: 320px) {
+     .post-detail-container{
+      display: flex;
+      flex-direction: column;
+     }
+
+     .main-post{
+      width: 100%;
+      height: 1000px;
+     }
+
+     .suggested-posts{
+      overflow: visible;
+      max-height: none;
+
+     }
+
+     .chat-input{
+      padding: 0;
+     }
+
+     .suggested-grid{
+          grid-template-columns: repeat(2, 160px);
+     }
+    /* When active */
+    .search-container.active #searchInput {
+        width: 160px;
+    }
+
+    .categories{
+      height: 150px;
+    }
+
+    
+.moon-sun-button{
+    margin: 200px 0 0 10px;
+}
+
+    /* Dropdown History */
+    #searchHistory {
+        width: 160px;
+        right: 35px;
+    }
+
+    .notifications-dropdown {
+        width: 100%;
+        max-height: 90vh;
+    }
+
+    .notification-details {
+        max-height: 75vh;
+    }
+
+    
+    .contact-dropdown {
+        right: -20px;
+    width: 90%;          /* stretch across most of screen */
+    max-width: none;      /* remove cap */
+  }
+}
+
+
+@media screen and (max-height: 568px) and (max-width: 320px) {
+    
+    /* When active */
+    .search-container.active #searchInput {
+        width: 120px;
+    }
+
+    
+.moon-sun-button{
+    margin: 70px 0 0 10px;
+}
+
+    
+    /* Dropdown History */
+    #searchHistory {
+        width: 120px;
+        right: 35px;
+    }
+
+     .contact-dropdown {
+    left: 0;
+    right: auto;
+    width: 95vw;          /* almost full width */
+    font-size: 13px;      /* make text smaller to fit */
+  }
+
+}
+
+
+/* responsiveness for ipads n stuff*/
+@media (min-width: 768px) and (max-width: 1114px) {
+   
+
+.moon-sun-button{
+    margin: 550px 0 0 10px;
+}
+
+
+    
+    /* When active */
+    .search-container.active #searchInput {
+        width: 400px;
+    }
+
+
+    /* Dropdown History */
+    #searchHistory {
+        width: 400px;
+        right: 35px;
+    }
+
+    
+    .notifications-dropdown {
+        max-height: 95vh;
+    }
+
+    .notification-details {
+        max-height: 80vh;
+    }
+
+    
+    .contact-dropdown {
+    width: 80vw;          /* safe width for tablets */
+    left: 10vw;           /* center a bit */
+    right: auto; 
+  }
+}

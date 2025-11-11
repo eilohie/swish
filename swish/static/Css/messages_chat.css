@@ -1,0 +1,721 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.entire-header {
+    padding: 30px;
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    position: fixed;
+    /* makes it stay on top */
+    top: 0;
+    /* sticks to the top */
+    left: 0;
+    right: 0;
+    background: white;
+    /* so it doesn’t overlap with posts */
+    z-index: 1000;
+}
+
+/*========== MENU BAR =================*/
+.menu-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+
+
+}
+
+.left-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+
+/* HAMBURGER MENU STYLING */
+.hamburger {
+    font-size: 20px;
+    cursor: pointer;
+    color: rgb(40, 40, 40);
+}
+
+svg {
+    width: 80px;
+    /* Adjust logo size */
+    height: 50px;
+    padding-bottom: 13px;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 80px;
+    left: -250px;
+    /* hidden by default */
+    width: 250px;
+    height: 100%;
+    background: white;
+    transition: left 0.3s ease;
+    z-index: 1500;
+    /* lower than header so hamburger/logo stay visible */
+    padding: 0 30px 0 30px;
+}
+
+/* Sidebar links */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 10px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.sidebar ul li a:hover {
+    background: linear-gradient(to right, #f0f0f0, transparent);
+}
+
+
+/* Active states */
+.sidebar.active {
+    left: 0;
+}
+
+.ham-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.ham-icon img {
+    width: 25px;
+    /* small neat size */
+    height: 25px;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 95%;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  font: inherit;
+  padding:5px;
+  transition:0.3s ease;
+}
+
+
+.moon-sun-button{
+    margin: 280px 0 0 10px;
+}
+
+
+.right-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+/*MENU BAR EXCEPTION OVERLAY*/
+#menu-overlay {
+    position: fixed;
+    top: 100px;
+    /* adjust to the height of your menu bar */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    /* dark transparent effect */
+    display: none;
+    /* hidden by default */
+    z-index: 999;
+    /* make sure it’s above everything */
+}
+
+
+
+/* Search Container */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-container input {
+    position: absolute;
+    right: 100%;
+    /* 👈 make it expand to the LEFT */
+    margin-right: 10px;
+    /* space between input and glass */
+    width: 0;
+    opacity: 0;
+    transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+.search-container.active input {
+    width: 500px;
+    /* your preferred width */
+    opacity: 1;
+}
+
+
+/* Search Icon */
+.search-icon img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+/* Search Input (hidden at first) */
+#searchInput {
+    width: 0;
+    padding: 10px;
+
+    font-size: 14px;
+    border: 3px solid #0072ff;
+    border-radius: 20px;
+    outline: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+/* When active */
+.search-container.active #searchInput {
+    width: 500px;
+    opacity: 1;
+}
+
+/* Dropdown History */
+#searchHistory {
+    position: absolute;
+    top: 36px;
+    right: 35px;
+    z-index: 1000;
+    width: 500px;
+    display: grid;
+    grid-template-columns: repeat(2, 240px);
+    background: white;
+    border-radius: 8px;
+    list-style: none;
+    padding: 5px 0;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#searchHistory li {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#searchHistory li:hover {
+    background: #f0f0f0;
+}
+
+.hidden {
+    display: none;
+}
+
+
+
+.icon {
+    display: flex;
+    align-items: center;
+}
+
+.icon img {
+    width: 25px;
+    /* small neat size */
+    height: 25px;
+}
+
+
+/* Notifications dropdown */
+.notifications-dropdown {
+    display: none;
+    position: absolute;
+    top: 70px;
+    /* adjust so it appears below the bell */
+    right: -100px;
+    background: #fff;
+    border-radius: 8px;
+    width: 400px;
+    z-index: 1000;
+    padding: 30px;
+    max-height: 88vh;
+
+}
+
+.notifications-dropdown p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #333;
+    cursor: default;
+}
+
+/* active state for notification icon */
+.notification-icon.active {
+    border: 2px solid #0072ff;
+    border-radius: 50%;
+    padding: 3px;
+}
+
+.updates-title {
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    height: 70px;
+    width: 100%;
+}
+
+.notification-details {
+    overflow-y: auto;
+    max-height: 500px;
+    
+    /* Hide scrollbar but keep scrolling */
+    scrollbar-width: none;       /* Firefox */
+    -ms-overflow-style: none;    /* IE/Edge */
+}
+
+.notification-details::-webkit-scrollbar {   /* Chrome, Safari, Opera */
+    display: none;
+}
+
+
+.notification-icon {
+    position: relative;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #0072ff;
+    color: white;
+    border-radius: 50%;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.mark-all-read-btn {
+    background: none;
+    border: none;
+    color: #0084ff;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.mark-all-read-btn:hover {
+    text-decoration: underline;
+}
+
+.notification-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.2s;
+    position: relative;
+}
+
+.notification-item:hover {
+    background: #f8f9fa;
+}
+
+.notification-item.unread {
+    background: #f0f8ff;
+}
+
+.notif-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.notif-text {
+    flex: 1;
+}
+
+.notif-text p {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+}
+
+.notif-time {
+    font-size: 12px;
+    color: #888;
+}
+
+.unread-dot {
+    width: 8px;
+    height: 8px;
+    background: #0084ff;
+    border-radius: 50%;
+    position: absolute;
+    right: 15px;
+}
+
+.no-notifications {
+    text-align: center;
+    padding: 40px 20px;
+    color: #888;
+}
+
+.pfp-icon img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+    /* makes it a circle */
+}
+
+
+/* Chat Container */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 100px 0 0 0;
+    background: #fff;
+    width: 100%;
+}
+
+/* Header */
+.chat-header {
+    display: flex;
+    align-items: center;
+    padding: 20px 15px;
+    background: #0072ff;
+    color: #fff;
+    width: 100%;
+}
+
+.chat-header .chat-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.chat-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+
+.receiver-profile-link {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* spacing between pic & name */
+    text-decoration: none; /* removes underline */
+    color: inherit; /* keeps same text color */
+}
+
+.receiver-profile-link:hover {
+    opacity: 0.8; /* little feedback on hover */
+}
+
+/* Chat Box */
+.chat-box {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    
+    /* Hide scrollbar but keep scrolling */
+    scrollbar-width: none;       /* Firefox */
+    -ms-overflow-style: none;    /* IE/Edge */
+}
+
+.chat-box::-webkit-scrollbar {   /* Chrome, Safari, Opera */
+    display: none;
+}
+
+
+.message {
+    max-width: 70%;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.message p {
+    margin: 0;
+}
+
+
+
+.message-content {
+  flex: 1;
+}
+
+.delete-message-form {
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  color: white;
+}
+
+/* Show delete button on hover */
+.message.sent:hover .delete-btn {
+  opacity: 0.7;
+}
+
+.delete-btn:hover {
+  opacity: 1 !important;
+  transform: scale(1.1);
+  color: #ff4444;
+}
+
+.delete-btn:active {
+  transform: scale(0.95);
+}
+
+.received-time {
+    font-size: 0.7em;
+    color: gray;
+    margin-top: 5px;
+    display: block;
+}
+
+/* Received (left side) */
+.received {
+    background: #e5e6e9;
+    align-self: flex-start;
+    border-top-left-radius: 0;
+}
+
+/* Sent (right side) */
+.sent {
+    background: #0072ff;
+    color: #fff;
+    align-self: flex-end;
+    border-top-right-radius: 0;
+    margin-left: 30%;
+}
+
+
+.timestamp {
+    font-size: 0.7em;
+    color: #bbbaba;
+    margin-top: 5px;
+    display: block;
+}
+
+/* Input Area */
+.chat-input {
+    display: flex;
+    border-top: 1px solid #ddd;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    outline: none;
+}
+
+.chat-input button {
+    background: #0072ff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+}
+
+.chat-input button:hover {
+    background: #005ecc;
+}
+
+
+.message-icon-wrapper {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.messages-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #0072ff; /* Blue */
+    color: white;
+    border-radius: 50%;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+/*=========== DARKMODE SETTINGS================*/
+/* Default Light Mode */
+body {
+    background: #ffffff;
+    color: #000000;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background: #121212;
+    color: #ffffff;
+}
+
+
+body.dark-mode .entire-header {
+    background-color: #121212;
+}
+
+body.dark-mode .sidebar {
+    background-color: #121212;
+}
+
+body.dark-mode .sidebar ul li a {
+    color: white;
+}
+
+
+body.dark-mode .sidebar ul li a:hover {
+    background: linear-gradient(to right, #303030 , transparent);
+}
+
+body.dark-mode .notification-item.unread {
+    background: #154f96;
+}
+
+body.dark-mode .notification-item:hover {
+    background: #525252;
+}
+body.dark-mode #searchInput {
+    background-color: #121212;
+    color: white;
+}
+
+body.dark-mode #searchHistory {
+    background-color: #121212;
+    color: white;
+}
+
+body.dark-mode .notifications-dropdown {
+    background: #121212;
+}
+
+body.dark-mode .notifications-dropdown p {
+    color: white;
+}
+
+body.dark-mode .updates-title {
+    background-color: #121212;
+}
+
+
+/* when dark mode is active */
+body.dark-mode .icon img {
+    filter: invert(1) brightness(100);
+    /* black -> white */
+}
+
+body.dark-mode .ham-icon img {
+    filter: invert(1) brightness(100);
+    /* black -> white */
+}
+
+body.dark-mode .search-icon img {
+    filter: invert(1) brightness(100);
+    /* black -> white */
+}
+
+
+/* dark mode */
+body.dark-mode .hamburger {
+    color: white;
+}
+
+body.dark-mode .chat-box {
+    background-color: #121212;
+}
+
+body.dark-mode .received {
+    color: white;
+    background-color: #192737;
+}
+
+body.dark-mode .received-time{
+     color: rgb(232, 230, 230)
+}
+
+
+body.dark-mode .chat-input input {
+    background-color: #121212;
+    color: white;
+}
