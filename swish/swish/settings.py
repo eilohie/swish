@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-wxl#7(@s=(mpkft^6s@2h3sjpi4#ey$ubi_%y$h+ja&$_oj!u9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["swish.onrender.com" , "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["swishapp.onrender.com" , "localhost", "127.0.0.1"]
 
 
 # Application definition
