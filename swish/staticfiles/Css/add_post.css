@@ -1,0 +1,777 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.entire-menu {
+    padding: 30px 30px 0 30px;
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    position: fixed;
+    /* makes it stay on top */
+    top: 0;
+    /* sticks to the top */
+    left: 0;
+    right: 0;
+    background: white;
+    /* so it doesn’t overlap with posts */
+    z-index: 1000;
+}
+
+/*========== MENU BAR =================*/
+.menu-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+
+
+}
+
+.left-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+
+/* HAMBURGER MENU STYLING */
+.hamburger {
+    font-size: 20px;
+    cursor: pointer;
+    color: rgb(40, 40, 40);
+}
+
+svg {
+    width: 80px;
+    /* Adjust logo size */
+    height: 50px;
+    padding-bottom: 13px;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 80px;
+    left: -250px;
+    /* hidden by default */
+    width: 250px;
+    height: 100%;
+    background: white;
+    transition: left 0.3s ease;
+    z-index: 1500;
+    /* lower than header so hamburger/logo stay visible */
+    padding: 0 30px 0 30px;
+}
+
+/* Sidebar links */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 10px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.sidebar ul li a:hover {
+    background: linear-gradient(to right, #f0f0f0, transparent);
+}
+
+/* Active states */
+.sidebar.active {
+    left: 0;
+}
+
+.ham-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.ham-icon img {
+    width: 25px;
+    /* small neat size */
+    height: 25px;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 95%;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  font: inherit;
+  padding:5px;
+  transition:0.3s ease;
+}
+
+
+.moon-sun-button{
+    margin: 280px 0 0 10px;
+}
+
+
+.right-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+/*MENU BAR EXCEPTION OVERLAY*/
+#menu-overlay {
+    position: fixed;
+    top: 100px;
+    /* adjust to the height of your menu bar */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    /* dark transparent effect */
+    display: none;
+    /* hidden by default */
+    z-index: 999;
+    /* make sure it’s above everything */
+}
+
+
+
+/* Search Container */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-container input {
+    position: absolute;
+    right: 100%;
+    /* 👈 make it expand to the LEFT */
+    margin-right: 10px;
+    /* space between input and glass */
+    width: 0;
+    opacity: 0;
+    transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+.search-container.active input {
+    width: 500px;
+    /* your preferred width */
+    opacity: 1;
+}
+
+
+/* Search Icon */
+.search-icon img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+/* Search Input (hidden at first) */
+#searchInput {
+    width: 0;
+    padding: 10px;
+
+    font-size: 14px;
+    border: 3px solid #0072ff;
+    border-radius: 20px;
+    outline: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+/* When active */
+.search-container.active #searchInput {
+    width: 500px;
+    opacity: 1;
+}
+
+/* Dropdown History */
+#searchHistory {
+    position: absolute;
+    top: 36px;
+    right: 35px;
+    z-index: 1000;
+    width: 500px;
+    display: grid;
+    grid-template-columns: repeat(2, 240px);
+    background: white;
+    border-radius: 8px;
+    list-style: none;
+    padding: 5px 0;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#searchHistory li {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#searchHistory li:hover {
+    background: #f0f0f0;
+}
+
+.hidden {
+    display: none;
+}
+
+
+
+.icon {
+    display: flex;
+    align-items: center;
+}
+
+.icon img {
+    width: 25px;
+    /* small neat size */
+    height: 25px;
+}
+
+
+.notifications-dropdown {
+    display: none;
+    position: absolute;
+    top: 70px;
+    /* adjust so it appears below the bell */
+    right: -100px;
+    background: #fff;
+    border-radius: 8px;
+    width: 400px;
+    z-index: 1000;
+    padding: 30px;
+    max-height: 88vh;
+
+}
+
+.notifications-dropdown p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #333;
+    cursor: default;
+}
+
+/* active state for notification icon */
+.notification-icon.active {
+    border: 2px solid #0072ff;
+    border-radius: 50%;
+    padding: 3px;
+}
+
+.updates-title {
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    height: 70px;
+    width: 100%;
+}
+
+.notification-details {
+    overflow-y: auto;
+    max-height: 500px;
+        
+    /* Hide scrollbar but keep scrolling */
+    scrollbar-width: none;       /* Firefox */
+    -ms-overflow-style: none;    /* IE/Edge */
+}
+
+.notification-details::-webkit-scrollbar {   /* Chrome, Safari, Opera */
+    display: none;
+}
+
+.notification-icon {
+    position: relative;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #0072ff;
+    color: white;
+    border-radius: 50%;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+.mark-all-read-btn {
+    background: none;
+    border: none;
+    color: #0084ff;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.mark-all-read-btn:hover {
+    text-decoration: underline;
+}
+
+.notification-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.2s;
+    position: relative;
+}
+
+.notification-item:hover {
+    background: #f8f9fa;
+}
+
+.notification-item.unread {
+    background: #f0f8ff;
+}
+
+.notif-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.notif-text {
+    flex: 1;
+}
+
+.notif-text p {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+}
+
+.notif-time {
+    font-size: 12px;
+    color: #888;
+}
+
+.unread-dot {
+    width: 8px;
+    height: 8px;
+    background: #0084ff;
+    border-radius: 50%;
+    position: absolute;
+    right: 15px;
+}
+
+.no-notifications {
+    text-align: center;
+    padding: 40px 20px;
+    color: #888;
+}
+
+
+.pfp-icon img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+    /* makes it a circle */
+}
+
+
+/* ========= Page Container ============ */
+.add-post-container {
+ padding: 130px 30px 30px 30px;
+    width: 100%;
+    height: fit-content;
+  border-radius: 12px;
+  background: #fff;
+}
+
+/* Title */
+.add-post-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0072ff;
+}
+
+/* Form */
+.add-post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Inputs & Textarea */
+.add-post-form input[type="text"],
+.add-post-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #0072ff;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: transparent;
+}
+
+/* Textarea Height */
+.add-post-form textarea {
+  min-height: 200px;
+  resize: vertical;
+}
+
+/* File Upload */
+.file-upload {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #0072ff;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  background: #f0f8ff;
+}
+
+/* Hide the ugly default file input */
+.file-upload input[type="file"] {
+  display: none;
+}
+
+.file-upload label {
+  flex: 1;
+  cursor: pointer;
+  color: #555;
+}
+
+/* Button */
+.add-post-form button {
+  background:transparent;
+  color: #333;
+  padding: 12px;
+  border:1px , solid,#0072ff ;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.3s ease;
+}
+
+.add-post-form button:hover {
+  background:#0072ff;
+  color: white;
+}
+
+
+/* Tags Input Container */
+.tags-input-container {
+  border: 1px solid #0072ff;
+  border-radius: 8px;
+  padding: 10px;
+  background: #f0f8ff;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+/* Input */
+#tags-input {
+  border: none;
+  flex: 1;
+  min-width: 120px;
+  font-size: 1rem;
+  padding: 5px;
+  outline: none;
+  background: transparent;
+}
+
+#tags-display{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+/* Tag Style */
+/* .tag {
+  background: #0072ff;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+
+} */
+
+/* X remove button */
+/* .tag .remove-tag {
+  cursor: pointer;
+  font-weight: bold;
+} */
+
+/* .tag .remove-tag:hover {
+ color: red;
+} */
+ 
+.categories-select {
+    margin: 1rem 0;
+}
+
+.categories-select label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+#tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.category-tag {
+    padding: 0.5rem 1rem;
+    background: #e0e0e0;
+    color: #333;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    user-select: none;
+}
+
+.category-tag:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.category-tag.selected {
+    background: #0072ff;
+    color: white;
+    font-weight: 500;
+}
+
+/* Dark mode support */
+.dark-mode .category-tag {
+    background: #2a2a2a;
+    color: #e0e0e0;
+}
+
+.dark-mode .category-tag.selected {
+    background: #0072ff;
+    color: white;
+}
+
+
+.back-link {
+  display: block;
+  margin-top: 1rem;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+}
+
+.back-link:hover {
+  color: #0072ff;
+}
+
+.message-icon-wrapper {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.messages-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #0072ff; /* Blue */
+    color: white;
+    border-radius: 50%;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/*=========== DARKMODE SETTINGS================*/
+/* Default Light Mode */
+body {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background: #121212;
+  color: #ffffff;
+}
+
+
+body.dark-mode .entire-menu {
+    background-color: #121212;
+}
+
+body.dark-mode .sidebar{
+    background-color:#121212 ;
+}
+
+body.dark-mode .sidebar ul li a{
+    color: white;
+}
+
+
+body.dark-mode .sidebar ul li a:hover {
+    background: linear-gradient(to right, #303030 , transparent);
+}
+
+
+
+body.dark-mode #searchInput{
+    background-color: #121212;
+    color: white;
+}
+
+body.dark-mode #searchHistory{
+    background-color: #121212;
+    color: white;
+}
+
+body.dark-mode .notifications-dropdown{
+    background: #121212;
+}
+
+body.dark-mode .notifications-dropdown p{
+    color: white;
+}
+
+body.dark-mode .updates-title {
+    background-color: #121212;
+}
+
+
+/* when dark mode is active */
+body.dark-mode .icon img {
+  filter: invert(1) brightness(100); /* black -> white */
+}
+
+
+/* But if the heart is liked, remove the filter so the red heart shows */
+.dark-mode .heart-icon.liked {
+  filter: none;
+}
+
+body.dark-mode .ham-icon img{
+     filter: invert(1) brightness(100); /* black -> white */
+}
+
+
+body.dark-mode .search-icon img{
+     filter: invert(1) brightness(100); /* black -> white */
+}
+
+
+/* dark mode */
+body.dark-mode .hamburger {
+  color: white
+}
+
+
+body.dark-mode .add-post-container{
+  background-color: #121212;
+}
+
+body.dark-mode .add-post-form button{
+  color: white;
+}
+
+body.dark-mode .back-link{
+  color: #a09f9f;
+}
+
+body.dark-mode .file-upload{
+  background-color: #121212;
+  color: white;
+}
+
+body.dark-mode .file-upload label {
+  color: #a09f9f;
+}
+
+body.dark-mode .tags-input-container{
+  background-color: #121212;
+  color: white;
+}
+
+
+body.dark-mode .tags-input-container input{
+  color: white;
+}
+
+
+body.dark-mode #tags-input::placeholder{
+  color: #a09f9f;
+}
+
+body.dark-mode .add-post-form input[type="text"]{
+  color: white;
+}
+
+body.dark-mode #post-title::placeholder{
+  color: #a09f9f;
+}
+
+body.dark-mode .add-post-form textarea{
+  color: white;
+}
+
+body.dark-mode #post-description::placeholder{
+  color: #a09f9f;
+}
+
+body.dark-mode .notification-item:hover {
+    background: #525252;
+}
+
+body.dark-mode .notification-item.unread {
+    background: #154f96;
+}

@@ -1,0 +1,1050 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/*================== MENU BIT ==================*/
+
+.entire-menu {
+    padding: 30px 30px 20px 30px;
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    position: fixed;
+    /* makes it stay on top */
+    top: 0;
+    /* sticks to the top */
+    left: 0;
+    right: 0;
+    background: white;
+    /* so it doesn’t overlap with posts */
+    z-index: 1000;
+}
+
+/*========== MENU BAR =================*/
+.menu-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.left-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+
+/* HAMBURGER MENU STYLING */
+.hamburger {
+    font-size: 20px;
+    cursor: pointer;
+    color: rgb(40, 40, 40);
+}
+
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 80px;
+    left: -250px;
+    /* hidden by default */
+    width: 250px;
+    height: 100%;
+    background: white;
+    transition: left 0.3s ease;
+    z-index: 1500;
+    /* lower than header so hamburger/logo stay visible */
+    padding: 0 30px 0 30px;
+}
+
+/* Sidebar links */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 10px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.sidebar ul li a:hover {
+    background: linear-gradient(to right, #f0f0f0, transparent);
+}
+
+
+/* Active states */
+.sidebar.active {
+    left: 0;
+}
+
+.ham-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.ham-icon img {
+    width: 25px;
+    /* small neat size */
+    height: 25px;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 95%;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  font: inherit;
+  padding:5px;
+  transition:0.3s ease;
+}
+
+
+.moon-sun-button{
+    margin: 280px 0 0 10px;
+}
+
+.right-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+/*MENU BAR EXCEPTION OVERLAY*/
+#menu-overlay {
+    position: fixed;
+    top: 100px;
+    /* adjust to the height of your menu bar */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    /* dark transparent effect */
+    display: none;
+    /* hidden by default */
+    z-index: 999;
+    /* make sure it’s above everything */
+}
+
+
+
+/* Search Container */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-container input {
+    position: absolute;
+    right: 100%;
+    /* 👈 make it expand to the LEFT */
+    margin-right: 10px;
+    /* space between input and glass */
+    width: 0;
+    opacity: 0;
+    transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+.search-container.active input {
+    width: 500px;
+    /* your preferred width */
+    opacity: 1;
+}
+
+
+/* Search Icon */
+.search-icon img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+/* Search Input (hidden at first) */
+#searchInput {
+    width: 0;
+    padding: 10px;
+
+    font-size: 14px;
+    border: 3px solid #0072ff;
+    border-radius: 20px;
+    outline: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+/* When active */
+.search-container.active #searchInput {
+    width: 500px;
+    opacity: 1;
+}
+
+/* Dropdown History */
+#searchHistory {
+    position: absolute;
+    top: 36px;
+    right: 35px;
+    z-index: 1000;
+    width: 500px;
+    display: grid;
+    grid-template-columns: repeat(2, 240px);
+    background: white;
+    border-radius: 8px;
+    list-style: none;
+    padding: 5px 0;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#searchHistory li {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#searchHistory li:hover {
+    background: #f0f0f0;
+}
+
+
+.hidden {
+    display: none;
+}
+
+svg {
+    width: 80px;
+    /* Adjust logo size */
+    height: 50px;
+    padding-bottom: 13px;
+}
+
+.right-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+
+.icon {
+    display: flex;
+    align-items: center;
+}
+
+.icon img {
+    width: 25px;
+    /* small neat size */
+    height: 25px;
+}
+
+
+/* Notifications dropdown */
+.notifications-dropdown {
+    display: none;
+    position: absolute;
+    top: 70px;
+    /* adjust so it appears below the bell */
+    right: -100px;
+    background: #fff;
+    border-radius: 8px;
+    width: 400px;
+    z-index: 1000;
+    padding: 30px;
+    max-height: 88vh;
+
+}
+
+.notifications-dropdown p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #333;
+    cursor: default;
+}
+
+/* active state for notification icon */
+.notification-icon.active {
+    border: 2px solid #0072ff;
+    border-radius: 50%;
+    padding: 3px;
+}
+
+.updates-title {
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    height: 70px;
+    width: 100%;
+}
+
+.notification-details {
+    overflow-y: auto;
+    max-height: 500px;
+
+        
+    /* Hide scrollbar but keep scrolling */
+    scrollbar-width: none;       /* Firefox */
+    -ms-overflow-style: none;    /* IE/Edge */
+}
+
+.notification-details::-webkit-scrollbar {   /* Chrome, Safari, Opera */
+    display: none;
+}
+
+
+.notification-icon {
+    position: relative;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #0072ff;
+    color: white;
+    border-radius: 50%;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.mark-all-read-btn {
+    background: none;
+    border: none;
+    color: #0084ff;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.mark-all-read-btn:hover {
+    text-decoration: underline;
+}
+
+.notification-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.2s;
+    position: relative;
+}
+
+.notification-item:hover {
+    background: #f8f9fa;
+}
+
+.notification-item.unread {
+    background: #f0f8ff;
+}
+
+.notif-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.notif-text {
+    flex: 1;
+}
+
+.notif-text p {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+}
+
+.notif-time {
+    font-size: 12px;
+    color: #888;
+}
+
+.unread-dot {
+    width: 8px;
+    height: 8px;
+    background: #0084ff;
+    border-radius: 50%;
+    position: absolute;
+    right: 15px;
+}
+
+.no-notifications {
+    text-align: center;
+    padding: 40px 20px;
+    color: #888;
+}
+
+.pfp-icon img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+    /* makes it a circle */
+}
+
+/*=========== PROFILE HEADER =====================*/
+
+.entire-profile {
+    padding: 120px 30px 40px 30px;
+    width: 100%;
+    height: fit-content;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+}
+
+
+.profile-picture img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    /* makes it a circle */
+}
+
+.username {
+    color: gray;
+}
+
+.description {
+    max-width: 400px;
+}
+
+.follow {
+    display: flex;
+    flex-direction: row;
+    font-size: 0.9rem;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: black;
+}
+
+.others {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    border: 3px solid #0072ff;
+    border-radius: 10px;
+    color: #333;
+    width: 120px;
+    transition: 0.3s, ease, 0.3s ease;
+}
+
+
+.btn:hover {
+    border: 3px solid transparent;
+    border-radius: 10px;
+    background-color: #0072ff;
+    color: white;
+    scale: 110%;
+}
+
+
+.three-dots {
+    position: relative; /* makes dropdown anchor to this */
+}
+/* ========== Default contact dropdown (desktop) ========== */
+.contact-dropdown {
+  display: none;
+  position: absolute;
+  top: 155%;
+  right: -70px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  padding: 10px;
+  min-width: 180px;
+  max-width: 250px; /* safety cap */
+  z-index: 2000;
+}
+
+.contact-dropdown p, 
+.contact-dropdown a {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+    text-align: left;
+}
+
+.contact-dropdown a:hover {
+    text-decoration: underline;
+    color: #0072ff;
+}
+
+
+
+
+.heart-icon {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.heart-icon:active {
+  transform: scale(1.2);
+}
+
+
+/*============= PORFILE CONTENTS================*/
+.tabs {
+    position: sticky;
+    top: 80px;
+    z-index: 1;
+    background-color: white;
+    text-align: center;
+    margin: 0 auto 30px auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #ddd;
+    /* 👈 the line */
+    max-width: 1500px;
+}
+
+.tabs span {
+    margin: 0 15px;
+    cursor: pointer;
+    font-weight: 700;
+    color: black;
+}
+
+.tabs span.active {
+    border-bottom: 2px solid black;
+    /* underline active tab */
+    padding-bottom: 4px;
+}
+
+
+
+/* ================= POSTS ================= */
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 275px);
+    padding: 30px;
+    gap: 20px;
+
+
+    /* Make hidden grids overlap instead of pushing content */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+/* Only the active one is visible and in flow */
+.post-grid.active-grid {
+    position: relative;
+    /* Put this one back into flow */
+    opacity: 1;
+    visibility: visible;
+
+}
+
+/* ================= SERVICE POSTS ================= */
+
+.plus-sign {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #0072ff;
+    border-radius: 10px;
+    position: fixed;
+    top: 650px;
+    right: 30px;
+    padding: 12px;
+     cursor: pointer;
+  transition: 0.3s;
+}
+
+
+.plus-sign img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.plus-sign:hover {
+  scale: 110%;
+}
+
+
+.post-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.post-picture {
+    height: 300px;
+    width: 275px;
+}
+
+
+.post-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post-user-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+/*text truncation with ellipsis.*/
+.post-user-name h4 {
+  max-width: 120px;   /* adjust depending on how much space you want */
+  white-space: nowrap; /* prevents the text from wrapping to a new line */
+  overflow: hidden;    /* hides extra characters */
+  text-overflow: ellipsis; /* shows "..." at the end */
+}
+
+
+.profile-link {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* spacing between pic & name */
+    text-decoration: none; /* removes underline */
+    color: inherit; /* keeps same text color */
+}
+.profile-link:hover {
+    opacity: 0.8; /* little feedback on hover */
+}
+
+.post-details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.post-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* ================= REVIEWS POSTS ================= */
+.reviews-card {
+    width: 275px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    border: 2px, solid, gray;
+    border-radius: 20px;
+}
+
+.reviewer-profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.reviewer-name {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+
+.reviewer-icon img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    /* makes it a circle */
+}
+
+.review-paragraph {
+    max-width: 250px;
+    color: gray;
+    margin-bottom: 10px;
+}
+
+.review-date {
+    color: gray;
+    font-size: 0.7rem;
+}
+
+
+
+.post-flip-thing {
+    position: relative;
+    /* anchor for absolute children */
+    min-height: 600px;
+    /* adjust so container always has space */
+}
+
+
+.message-icon-wrapper {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.messages-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #0084ff; /* Blue */
+    color: white;
+    border-radius: 50%;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+/*=========== DARKMODE SETTINGS================*/
+/* Default Light Mode */
+body {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background: #121212;
+  color: #ffffff;
+}
+
+
+body.dark-mode .entire-menu {
+    background-color: #121212;
+}
+
+body.dark-mode .sidebar{
+    background-color:#121212 ;
+}
+
+body.dark-mode .sidebar ul li a{
+    color: white;
+}
+
+
+body.dark-mode .sidebar ul li a:hover {
+    background: linear-gradient(to right, #303030 , transparent);
+}
+
+body.dark-mode #searchInput{
+    background-color: #121212;
+    color: white;
+}
+
+body.dark-mode #searchHistory{
+    background-color: #121212;
+    color: white;
+}
+
+
+body.dark-mode .notifications-dropdown{
+    background: #121212;
+}
+
+body.dark-mode .notifications-dropdown p{
+    color: white;
+}
+
+body.dark-mode .updates-title {
+    background-color: #121212;
+}
+
+
+/* when dark mode is active */
+body.dark-mode .icon img {
+  filter: invert(1) brightness(100); /* black -> white */
+}
+
+
+body.dark-mode .notification-item.unread {
+    background: #154f96;
+}
+
+
+body.dark-mode .notification-item:hover {
+    background: #525252;
+}
+/* But if the heart is liked, remove the filter so the red heart shows */
+.dark-mode .heart-icon.liked {
+  filter: none;
+}
+
+body.dark-mode .ham-icon img{
+     filter: invert(1) brightness(100); /* black -> white */
+}
+
+
+body.dark-mode .search-icon img{
+     filter: invert(1) brightness(100); /* black -> white */
+}
+
+body.dark-mode .dot{
+    background-color: white;
+}
+
+
+
+/* dark mode */
+body.dark-mode .hamburger {
+  color: white;
+}
+body.dark-mode .btn{
+    color: white;
+}
+
+body.dark-mode .tabs{
+    background-color: #121212;
+    border-bottom: #fff 3px solid;
+}
+
+body.dark-mode .tabs span{
+    color: white;
+}
+
+body.dark-mode .tabs span.active{
+    border-bottom: 2px solid white;
+}
+
+
+
+body.dark-mode .contact-dropdown{
+    background-color: #121212;
+}
+
+body.dark-mode .contact-dropdown p{
+    color: white;
+}
+body.dark-mode .contact-dropdown a{
+    color: white;
+}
+
+body.dark-mode .contact-dropdown a:hover{
+    color: #2685f8;
+    text-decoration: underline;
+}
+
+
+/*responsiveness for lil phones*/
+@media screen and (max-width: 767px) and (min-width: 320px) {
+    .post-grid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .post-picture {
+        width: 100%;
+    }
+
+    .plus-sign {
+        top: 90%;
+    }
+
+    .reviews-card {
+        width: 100%;
+    }
+
+    .review-paragraph {
+        max-width: 90%;
+    }
+
+    /* When active */
+    .search-container.active #searchInput {
+        width: 160px;
+    }
+
+
+    /* Dropdown History */
+    #searchHistory {
+        width: 160px;
+        right: 35px;
+    }
+
+    .notifications-dropdown {
+        width: 100%;
+        max-height: 90vh;
+    }
+
+    .notification-details {
+        max-height: 75vh;
+    }
+
+    
+    .contact-dropdown {
+        right: -20px;
+    width: 90%;          /* stretch across most of screen */
+    max-width: none;      /* remove cap */
+  }
+}
+
+
+
+@media screen and (max-height: 568px) and (max-width: 320px) {
+    
+    .plus-sign {
+        top: 95%;
+    }
+
+    
+     .contact-dropdown {
+    left: 0;
+    right: auto;
+    width: 95vw;          /* almost full width */
+    font-size: 13px;      /* make text smaller to fit */
+  }
+}
+
+
+
+/* responsiveness for ipads n stuff*/
+@media (min-width: 768px) and (max-width: 1114px) {
+    .post-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 370px);
+    }
+
+    
+    .post-picture {
+        width: 100%;
+    }
+
+    
+    .plus-sign {
+        top: 93%;
+    }
+
+    
+    .reviews-card {
+        width: 100%;
+    }
+
+    .review-paragraph {
+        max-width: 90%;
+    }
+
+
+    
+    /* When active */
+    .search-container.active #searchInput {
+        width: 400px;
+    }
+
+
+    /* Dropdown History */
+    #searchHistory {
+        width: 400px;
+        right: 35px;
+    }
+
+    
+    .notifications-dropdown {
+        max-height: 95vh;
+    }
+
+    .notification-details {
+        max-height: 80vh;
+    }
+
+    
+    .contact-dropdown {
+    width: 80vw;          /* safe width for tablets */
+    left: 10vw;           /* center a bit */
+    right: auto; 
+  }
+}
