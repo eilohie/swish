@@ -690,7 +690,7 @@ svg {
     border-radius: 10px;
     position: fixed;
     top: 650px;
-    right: 30px;
+    right: 3%;
     padding: 12px;
      cursor: pointer;
   transition: 0.3s;
@@ -1151,9 +1151,8 @@ body.dark-mode .contact-dropdown a:hover{
         right: 35px;
     }
 
-    .notifications-dropdown {
-        width: 100%;
-        max-height: 90vh;
+   .notifications-dropdown {
+        right: -150px;
     }
 
     .notification-details {

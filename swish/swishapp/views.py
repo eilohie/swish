@@ -900,8 +900,8 @@ def search(request):
             user_query |= Q(first_name__icontains=word)
             user_query |= Q(last_name__icontains=word)
 
-        posts = Post.objects.filter(post_query).distinct()
-        users = User.objects.filter(user_query).distinct()
+        posts = Post.objects.filter(post_query).distinct().order_by('?')
+        users = User.objects.filter(user_query).distinct().order_by('?')
 
     return render(request, 'search_results.html', {
         'query': query,

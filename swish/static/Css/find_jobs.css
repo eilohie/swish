@@ -643,6 +643,14 @@ svg {
   position: relative;
   box-shadow: 0 8px 30px rgba(0,0,0,0.25);
   animation: popupFade 0.3s ease-out;
+ 
+    /* Hide scrollbar but keep scrolling */
+    scrollbar-width: none;       /* Firefox */
+    -ms-overflow-style: none;    /* IE/Edge */
+}
+
+.modal-content::-webkit-scrollbar {   /* Chrome, Safari, Opera */
+    display: none;
 }
 
 /* Close button */
@@ -1083,6 +1091,13 @@ body.dark-mode .hirer-name a{
         flex-direction: column;
     }
 
+    .entire-jobs-page{
+      flex-direction: column;
+    }
+
+    .job-post-cat{
+      width: 100%;
+    }
     .create-job-btn {
         top: 90%;
     }
@@ -1107,9 +1122,8 @@ body.dark-mode .hirer-name a{
         right: 35px;
     }
 
-    .notifications-dropdown {
-        width: 100%;
-        max-height: 90vh;
+   .notifications-dropdown {
+        right: -150px;
     }
 
     .notification-details {

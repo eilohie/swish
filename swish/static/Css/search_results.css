@@ -671,3 +671,64 @@ body.dark-mode .arrow{
     color: white;
 }
 
+@media screen and (max-height: 568px) and (max-width: 320px) {
+    .post-grid{
+        display: flex;
+        flex-direction: column;
+    }
+
+}
+
+
+/*responsiveness for lil phones*/
+@media screen and (max-width: 767px) and (min-width: 320px) {
+     .post-grid{
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    
+    .post-picture {
+    height: 300px;
+    width: 350px;
+}
+
+
+
+    /* When active */
+    .search-container.active #searchInput {
+        width: 160px;
+    }
+    /* Dropdown History */
+    #searchHistory {
+        width: 160px;
+        right: 35px;
+    }
+
+   .notifications-dropdown {
+        right: -150px;
+    }
+
+    .notification-details {
+        max-height: 75vh;
+    }
+
+    
+    .contact-dropdown {
+        right: -20px;
+    width: 90%;          /* stretch across most of screen */
+    max-width: none;      /* remove cap */
+  }
+}
+
+
+/* responsiveness for ipads n stuff*/
+@media (min-width: 768px) and (max-width: 1114px) {
+    .post-grid{
+        grid-template-columns: repeat(3, 275px);
+
+    }
+
+    
+}

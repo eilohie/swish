@@ -226,7 +226,7 @@
 
         <div class="job-post-grid">
            {% for job in jobs %}
-            <div class="job-card" data-email="{{ job.user.email }}">
+            <div class="job-card" data-email="{{ job.user.email }}" data-description="{{ job.description|escapejs }}">
                 <div class="hirer-profile">
 
                     <div class="hirer-icon">

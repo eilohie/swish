@@ -185,7 +185,7 @@ document.querySelectorAll(".job-card").forEach(card => {
     modalHirerName.innerText = card.querySelector(".hirer-name").innerText;
     modalHirerUsername.innerText = card.querySelector(".hirer-username").innerText;
     modalJobTitle.innerText = card.querySelector(".job-title h1").innerText;
-    modalJobDescription.innerText = card.querySelector(".job-paragraph p").innerText;
+    modalJobDescription.innerText = card.dataset.description;
     modalJobDate.innerText = card.querySelector(".job-date p").innerText;
 
     const email = card.dataset.email;
