@@ -807,7 +807,7 @@ svg {
   transition: 0.3s;
 }
 .close-btn:hover {
-  color: #222;
+  color: #f30707;
   transform: scale(1.1);
 }
 
@@ -853,9 +853,9 @@ svg {
 
 /* ===== SUBMIT BUTTON ===== */
 .submit-btn {
-  background: linear-gradient(135deg, #6a5acd, #7b68ee);
-  color: #fff;
-  border: none;
+  background:none;
+  color: #0b0b0b;
+  border: 1px solid #0072ff;
   border-radius: 10px;
   padding: 12px;
   font-size: 1rem;
@@ -867,7 +867,8 @@ svg {
 
 .submit-btn:hover {
   transform: translateY(-2px);
-  background: linear-gradient(135deg, #7b68ee, #8a2be2);
+  background: #0072ff;
+  color: white;
   box-shadow: 0 7px 18px rgba(106, 90, 205, 0.4);
 }
 
@@ -886,7 +887,17 @@ svg {
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     gap: 8px;
     margin-bottom: 12px;
+     overflow-y: auto;
+    max-height: 150px;   
+    /* Hide scrollbar but keep scrolling */
+    scrollbar-width: none;       /* Firefox */
+    -ms-overflow-style: none;    /* IE/Edge */
 }
+
+.category-checkboxes::-webkit-scrollbar {   /* Chrome, Safari, Opera */
+    display: none;
+}
+
 
 .category-item {
     font-size: 14px;
@@ -1081,9 +1092,47 @@ body.dark-mode .hirer-name a{
   color: white;
 }
 
+body.dark-mode .create-job-modal-content {
+  background-color: #121212;
+  color: white;
+}
 
+body.dark-mode .create-job-modal-content h2{
+  color: white;
+}
 
+body.dark-mode #createJobForm label {
+  color: white;
+}
 
+body.dark-mode #createJobForm input{
+  background-color: #121212;
+  color: white;
+}
+
+body.dark-mode #createJobForm textarea{
+  background-color: #121212;
+  color: white;
+}
+
+body.dark-mode #createJobForm textarea:focus{
+  background-color: #121212;
+  color: white;
+}
+
+body.dark-mode #createJobForm input:focus{
+  background-color: #121212;
+  color: white;
+}
+
+body.dark-mode .submit-btn{
+  color: white;
+   box-shadow: 0 5px 14px rgba(26, 22, 52, 0.3);
+}
+
+body.dark-mode .submit-btn:hover{
+  box-shadow: 0 7px 18px rgba(24, 21, 48, 0.4);
+}
 /*responsiveness for lil phones*/
 @media screen and (max-width: 767px) and (min-width: 320px) {
     .job-post-grid {
