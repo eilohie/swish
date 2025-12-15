@@ -477,13 +477,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // -------------------- Time Formatting --------------------
   function timeAgo(iso) {
-    const d = new Date(iso);
-    const diff = Math.floor((Date.now() - d.getTime()) / 1000);
-    if (diff < 60) return 'Just now';
+    const d = new Date(iso); //creates a date object easy to understand from ms
+    const diff = Math.floor((Date.now() - d.getTime()) / 1000); // date.now is the date now in ms and d.gettime is the date the comment was made in ms and /1000 converts it to seconds maths floor removes decimals
+    if (diff < 60) return 'Just now'; // 60 seconds = to 1 minutes so thats the maths for below
     if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
     if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
     if (diff < 604800) return Math.floor(diff / 86400) + 'd ago';
-    return d.toLocaleDateString();
+    return d.toLocaleDateString(); // here it means the comment has passed a week so itll just show the date it was made instead of saying 8 days ago or 100 days ago
   }
 
   // -------------------- Truncation --------------------
