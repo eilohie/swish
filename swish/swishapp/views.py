@@ -23,7 +23,7 @@ from django.dispatch import receiver
 @login_required(login_url='login')
 def home(request):
     featured_posts = Post.objects.filter(featured=True).order_by('?')[:6]
-    all_posts = Post.objects.order_by('?')[:20]
+    all_posts = Post.objects.order_by('?')[:100]
     categories = Category.objects.all().order_by('?')  # Optional: shuffle categories
 
     context = {
