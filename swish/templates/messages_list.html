@@ -193,7 +193,7 @@
     <!-- THE COVERSATION RECTANGLES -->
 
     <div class="conversations-container">
-      <h1>Messages</h1>
+      <h1>Conversations</h1>
       <div class="conversation-grid">
       {% for item in conversations %}
         <div class="conversation-wrapper">
@@ -215,6 +215,8 @@
             <button type="submit" class="delete-conversation-btn" title="Delete conversation">X</button>
           </form>
         </div>
+        {% empty %}
+          <p class="no-messages-text">No conversations yet</p>
       {% endfor %}
       </div>
     </div>

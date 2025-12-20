@@ -583,7 +583,11 @@ height: 100vh;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-
+.no-messages-text{
+    text-align: center;
+    color: #888; 
+    padding: 40px;
+}
 
 
 /*=========== DARKMODE SETTINGS================*/

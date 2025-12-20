@@ -316,8 +316,8 @@
                                     <div class="replies-container hidden" data-loaded="false"></div>
                                 </div>
                             </div>
-                            {% empty %}
-                            <p class="no-comments">Be the first to comment.</p>
+                            {% comment %} {% empty %}
+                            <p class="no-comments">Be the first to comment.</p> {% endcomment %}
                             {% endfor %}
                         </div>
 

@@ -518,7 +518,9 @@ svg {
   color: #0072ff;
 }
 
-
+.social-input input{
+    background: none;
+}
 
 .message-icon-wrapper {
     position: relative;

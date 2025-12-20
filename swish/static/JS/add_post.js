@@ -3,7 +3,6 @@
 const tagContainer = document.getElementById('tag-container');
 const selectedCategoriesInput = document.getElementById('selected-categories');
 let selectedCategories = [];
-
 // Handle category tag clicks
 if (tagContainer) {
     tagContainer.addEventListener('click', (e) => {

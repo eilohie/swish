@@ -277,12 +277,13 @@ def post_detail(request, post_id):
 @login_required
 @require_POST
 def api_add_comment(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-    body = request.POST.get('body', '').strip()
-    parent_id = request.POST.get('parent')  # optional
+    post = get_object_or_404(Post, id=post_id)# get post id
+    body = request.POST.get('body', '').strip() # get the comment message
+    parent_id = request.POST.get('parent')  # get parent comment id if the comment sent is a reply
 
     if not body:
         return JsonResponse({'error': 'Empty comment'}, status=400)
+    # no empty comments allowed
 
     parent = None
     if parent_id:
@@ -290,6 +291,7 @@ def api_add_comment(request, post_id):
             parent = Comment.objects.get(id=int(parent_id), post=post)
         except Comment.DoesNotExist:
             return JsonResponse({'error': 'Parent not found'}, status=404)
+    # if its a reply comment make sure the parent comment exists and belongs to the post
 
     comment = Comment.objects.create(
         post=post,
@@ -297,6 +299,7 @@ def api_add_comment(request, post_id):
         body=body,
         parent=parent
     )
+    #cook new comand
 
     # ✅ Create notification
     if parent:
@@ -320,7 +323,7 @@ def api_add_comment(request, post_id):
                 comment=comment
             )
 
-    # Build returned payload
+    # Build returned payload ,The chef wraps up all the info about the new comment (id, text, time, who wrote it, avatar picture) and also says "Now there are 15 comments total!"
     data = {
         'id': comment.id,
         'body': comment.body,
@@ -341,11 +344,13 @@ def api_add_comment(request, post_id):
 @login_required
 @require_http_methods(['DELETE', 'POST'])
 def api_delete_comment(request, comment_id):
+    #find the comment the person wants to throw away and check name tag
     try:
         comment = Comment.objects.get(id=comment_id)
     except Comment.DoesNotExist:
         return JsonResponse({'error': 'Not found'}, status=404)
-
+    
+    #if the user doesnt own the comment they cant delete it
     if comment.user != request.user:
         return HttpResponseForbidden('Not allowed')
 
@@ -354,12 +359,13 @@ def api_delete_comment(request, comment_id):
     # ✅ Delete associated notifications when comment is deleted
     Notification.objects.filter(comment=comment).delete()
     
-    comment.delete()
+    comment.delete() #Tell the browser "All good! Now there are fewer comments total."
     return JsonResponse({'success': True, 'comments_count': post.comments.count()})
 
 
 @no_cache
 def api_get_replies(request, comment_id):
+    #checks if the main comment exists
     try:
         parent = Comment.objects.get(id=comment_id)
     except Comment.DoesNotExist:
@@ -657,7 +663,7 @@ def delete_post(request, post_id):
 def suggested_posts(request):
     page = request.GET.get('page', 1)
     posts = Post.objects.all().order_by('-id')
-    paginator = Paginator(posts, 30)  # 30 images per load
+    paginator = Paginator(posts, 100)  # 100 images per load
 
     results = []
     try:
