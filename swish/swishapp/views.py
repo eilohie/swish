@@ -692,25 +692,27 @@ def messages_list(request):
 @no_cache
 @login_required
 def conversations_list(request):
-    conversations = Conversation.objects.filter(participants=request.user)
+    conversations = Conversation.objects.filter(participants=request.user) # it looks for evry conversation that your in , u and another person
 
+    # for evry chat room
     conversation_data = []
     for conv in conversations:
-        other_user = conv.participants.exclude(id=request.user.id).first()
-        last_message = conv.messages.order_by('-timestamp').first()
+        other_user = conv.participants.exclude(id=request.user.id).first() #finds the other friend (not u )
+        last_message = conv.messages.order_by('-timestamp').first() # finds the last meassage that was sent
         
         # Count unread messages from the other user
         unread_count = conv.messages.filter(
             is_read=False
         ).exclude(sender=request.user).count()
 
+        # puts all the info in this space called conversation_data
         conversation_data.append({
             'conversation': conv,
             'other_user': other_user,
             'last_message': last_message,
             'unread_count': unread_count  # 👈 Add this
         })
-
+       #then conversation_data gives all the info to messages_list.html to display with the css
     return render(request, 'messages_list.html', {
         'conversations': conversation_data
     })
@@ -727,7 +729,7 @@ def delete_conversation(request, conversation_id):
         if request.user in conversation.participants.all():
             conversation.delete()
             
-            # If using AJAX, return JSON response
+            # If using AJAX, return JSON response , If you clicked with a magic fast button (AJAX), it just says "success!" quietly.If normal click  sends you back to the messages list.
             if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                 return JsonResponse({'status': 'success'})
             
@@ -749,28 +751,34 @@ def delete_conversation(request, conversation_id):
 def chat_view(request, username):
 
     if request.user.username == username:
-        return redirect('user_profile', username=username)
+        return redirect('user_profile', username=username) #If you try to open a chat with your own name ud be Sent back to your profile.
 
-    other_user = get_object_or_404(User, username=username)
+    other_user = get_object_or_404(User, username=username) #Looks up the person with that username. If they don’t exist  "Oops, not found!"
 
     # ✅ Find existing conversation
     conversations = Conversation.objects.filter(participants=request.user)\
                                        .filter(participants=other_user)
-
+    # If you already have one (or even many)  picks the newest one
     if conversations.exists():
         conversation = conversations.order_by('-updated_at').first()
+        # , If there’s more than one  throws away the extras (keeps things clean)
         if conversations.count() > 1:
             conversations.exclude(id=conversation.id).delete()
+    #If no chat room exists yet  make a brand new one! Then adds both you and your friend inside.
     else:
         conversation = Conversation.objects.create()
         conversation.participants.add(request.user, other_user)
 
-    # ✅ Mark unread messages as read
+    # ✅ Mark unread messages as read when u open the massaege chat
     conversation.messages.filter(
         sender=other_user, is_read=False
     ).update(is_read=True)
 
     # ✅ Handle POST
+#     Takes what you typed
+# Saves it as a new message from you
+# Puts it in the chat room
+# Shows the whole chat page again with your new message at the bottom
     if request.method == 'POST':
         message_text = request.POST.get('message', '').strip()
         if message_text:
@@ -801,7 +809,7 @@ def chat_view(request, username):
 @login_required
 def delete_message(request, message_id):
     if request.method == 'POST':
-        message = get_object_or_404(Message, id=message_id)
+        message = get_object_or_404(Message, id=message_id) # finds the exact message u want to delete (the id)
         
         # Only allow the sender to delete their own message
         if message.sender == request.user:
