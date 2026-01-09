@@ -32,6 +32,9 @@ function toggleSearch() {
 }
 
 // --- Show Dropdown Search History ---
+// As you type, a little list drops down with old things you searched before (like "Art", "Photography").
+// It only shows ones that match what you're typing.
+// If you type nothing or nothing matches  the list hides.
 function showHistory() {
     const input = document.getElementById("searchInput").value.toLowerCase();
     const list = document.getElementById("searchHistory");
@@ -205,10 +208,10 @@ categories.addEventListener("mouseleave", () => {
 const themeToggle = document.getElementById("theme-toggle");
 const themeIcon = document.getElementById("theme-icon");
 
-// check localStorage for theme preference on page load
+// it checks the local strorage for the last theme u were on when u last visited the site
 document.addEventListener("DOMContentLoaded", () => {
   const savedTheme = localStorage.getItem("theme");
-
+//if on dark show cs for dark mode n put the sun icon else remove dark mode cs and put moon icon
   if (savedTheme === "dark") {
     document.body.classList.add("dark-mode");
     themeIcon.src = "/static/images/sun.svg"; // sun icon
@@ -221,7 +224,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // toggle theme on click
 themeToggle.addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
-
+// if the icon is clicked and the pge was on light mode itll change to dark and sun icon will appear also saving to the local storage memory that we are on dark now and viceversa
   if (document.body.classList.contains("dark-mode")) {
     themeIcon.src = "/static/images/sun.svg"; // sun icon
     localStorage.setItem("theme", "dark");
@@ -366,6 +369,7 @@ document.querySelectorAll('.share-icon').forEach(icon => {
 
 
 // =================== HEADER SLIDES ================
+//---- getting all the elements -----
 const slides = document.querySelectorAll('.slide');
 const rectContainer = document.querySelector('.rect-carousel');
 const categorySpan = document.querySelector('.featured-category');
@@ -378,6 +382,7 @@ let index = 0;
 let timer;
 
 // Create rects based on slide count
+// The wizard counts how many pictures there are and builds exactly that many dots automatically.
 rectContainer.innerHTML = Array.from(slides)
   .map(() => `<div class='rect'></div>`)
   .join("");
@@ -385,12 +390,18 @@ rectContainer.innerHTML = Array.from(slides)
 const rects = document.querySelectorAll('.rect');
 
 function updateSlides() {
+  //Turns off all “active/prev/next” lights from old pictures and dots
   slides.forEach(slide => slide.classList.remove('active', 'prev', 'next'));
   rects.forEach(rect => rect.classList.remove('active', 'prev', 'next'));
 
+//   Figures out:
+// Which one is in the middle now (active)
+// Which one was before (prev — peeks from left)
+// Which one is coming next (next — peeks from right)
   const prevIndex = (index - 1 + slides.length) % slides.length;
   const nextIndex = (index + 1) % slides.length;
 
+  // Lights them up with special classes so CSS can make them big/faded/move
   slides[index].classList.add('active');
   slides[prevIndex].classList.add('prev');
   slides[nextIndex].classList.add('next');
@@ -400,25 +411,28 @@ function updateSlides() {
   rects[nextIndex].classList.add('next');
 
   const current = slides[index];
-
+//  Reads secret notes hidden in the current picture (data-category, data-title, etc.) and puts them in the screen
   categorySpan.textContent = current.dataset.category;
   captionTitle.textContent = current.dataset.title;
   captionTitle.href = current.dataset.profileUrl;
   captionSubtitle.textContent = "By " + current.dataset.username;
 }
 
+// → Tap right arrow → go to next picture, refresh everything, and restart the timer
 rightArrow.addEventListener('click', () => {
-  index = (index + 1) % slides.length;
+  index = (index + 1) % slides.length; //this maths is like a cirlce When you’re on the last picture and go right jumps back to the first! Never ends!
   updateSlides();
   resetTimer();
 });
 
+// ← Tap left arrow → go to previous picture
 leftArrow.addEventListener('click', () => {
   index = (index - 1 + slides.length) % slides.length;
   updateSlides();
   resetTimer();
 });
 
+// Every 5 seconds (5000 milliseconds), it quietly goes to the next picture
 function autoSlide() {
   index = (index + 1) % slides.length;
   updateSlides();
@@ -430,6 +444,7 @@ function resetTimer() {
 }
 
 // Init
+//When the page loads start the timer and show the first picture nicely.
 timer = setInterval(autoSlide, 5000);
 updateSlides();
 
